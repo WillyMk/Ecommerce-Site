@@ -5,8 +5,8 @@ const saveDepartment = (employee) => {
   return axios.post(DEPT, employee);
 };
 
-const getDepartment = () => {
-  return axios.get(DEPT);
+const getDepartment = (params) => {
+  return axios.get(DEPT, {params});
 };
 
 const deleteDepartment = (id) => {

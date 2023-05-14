@@ -6,9 +6,9 @@ import { CustomBrowserRouter } from "./_helpers/history";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <CustomBrowserRouter>
       <App />
     </CustomBrowserRouter>
-  </React.StrictMode>
+  // </React.StrictMode>
 );

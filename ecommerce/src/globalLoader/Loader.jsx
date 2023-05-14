@@ -1,5 +1,5 @@
 import React from "react";
-import { RingLoader } from "react-spinners";
+import "./loader.css"
 
 export default function Loading() {
   return (
@@ -13,7 +13,32 @@ export default function Loading() {
         position: "absolute",
       }}
     >
-      <RingLoader size={80} color="#0c4dd8" margin={2} />
+     <div className="boxes">
+    <div className="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div className="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div className="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div className="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
     </div>
   );
 }

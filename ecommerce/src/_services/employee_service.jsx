@@ -5,8 +5,8 @@ const Employee = "http://localhost:8081/api/employee";
         return axios.post(Employee, employee);
     }
 
-    const getEmployees = () => {
-        return axios.get(Employee);
+    const getEmployees = (params) => {
+        return axios.get(Employee, {params});
     }
 
 export const employeeService = {

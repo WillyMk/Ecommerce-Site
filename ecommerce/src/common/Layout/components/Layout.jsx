@@ -20,8 +20,8 @@ const Home = () => {
   const [visible, setVisible] = useState(false);
   const [openKeys, setOpenKeys] = useState(["/home"]);
   const navigate = useNavigate();
-  const [borderColor, setBorderColor] = useState("#5651ab");
-  const colorValue = localStorage.getItem("theme");
+  // const colorValue = localStorage.getItem("theme");
+  const colorValue = "#201a79";
 
   const handleShowProfileClick = () => {
     console.log("Show Profile clicked");

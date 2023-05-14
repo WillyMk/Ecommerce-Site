@@ -25,9 +25,9 @@ const AddEmployee = (props) => {
   const fetchDepartments = useCallback(() => {
     setDepartment([]);
     departmentService
-      .getDepartment()
+      .getDepartment({page: 1, pageSize: 10})
       .then((resp) => {
-        setDepartment(resp?.data || []);
+        setDepartment(resp?.data?.content || []);
       })
       .catch((err) => {
         message.error("Could not fetch");
@@ -54,7 +54,7 @@ const AddEmployee = (props) => {
       .saveEmployee(values)
       .then((resp) => {
         message.success("Employee saved successfully");
-        props.resetFields();
+        form.resetFields();
         goBack();
       })
       .catch((err) => {

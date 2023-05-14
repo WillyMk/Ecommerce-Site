@@ -8,15 +8,25 @@ import { useNavigate } from "react-router-dom";
 const Department = () => {
   const [department, setDepartment] = useState([]);
   const [loading, setLoading] = useState(false);
+  const start_page = { page: 1, pageSize: 10 };
+  const [page, setPage] = useState(start_page);
+  const [total_elements, setTotalElements] = useState(10);
+  const [searchParams, setSearchParams] = useState(page);
+
   const navigate = useNavigate();
 
-  const fetchDepartments = useCallback(() => {
+  useEffect(() => {
+    fetchDepartments(searchParams);
+  }, [searchParams]);
+
+  const fetchDepartments = () => {
     setLoading(true);
     setDepartment([]);
     departmentService
-      .getDepartment()
+      .getDepartment(searchParams)
       .then((resp) => {
-        setDepartment(resp?.data || []);
+        setDepartment(resp?.data?.content || []);
+        setTotalElements(resp?.data?.totalElements || 0);
         setLoading(false);
       })
       .catch((err) => {
@@ -24,11 +34,7 @@ const Department = () => {
         console.log(err);
         setLoading(false);
       });
-  }, []);
-
-  useEffect(() => {
-    fetchDepartments();
-  }, [fetchDepartments]);
+  }
 
   const deptColumns = [
     ...departmentColumns,
@@ -69,22 +75,33 @@ const Department = () => {
         message.error("Cannot delete department");
       });
   };
+
+  const handleTableChange = (data) => {
+    let current_page = { page: data.current, pageSize: data.pageSize };
+    let params = {
+      ...searchParams,
+      ...current_page,
+    };
+
+    setSearchParams(params);
+    setPage(current_page);
+  };
   return (
     <div>
       <Card
         title={"Departments"}
         extra={
-          <Button
-            size="small"
-            type="primary"
-            onClick={() => {
-              navigate("/organisation/departments/add", {
-                state: { isAddNew: true },
-              });
-            }}
-          >
-            New Department
-          </Button>
+          <>
+          <button
+              className="button"
+              onClick={() => {
+                navigate("/organisation/departments/add", { state: { isAddNew: true } });
+              }}
+            >
+              <div className="button-overlay"></div>
+              <span>New Department</span>
+            </button>
+          </>
         }
       >
         <Table
@@ -93,8 +110,12 @@ const Department = () => {
           bordered
           dataSource={department}
           columns={deptColumns}
-          //   onChange={handleTableChange}
-          //   pagination={{ total: total_elements, current: page.page, pageSize: page.pageSize }}
+            pagination={{
+                page: page.page,
+                pageSize: page.pageSize,
+                total: total_elements
+            }}
+            onChange={handleTableChange}  
           rowKey={(record) => record.id}
         />
       </Card>

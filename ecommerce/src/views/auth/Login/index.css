@@ -50,8 +50,8 @@ button:hover {
     justify-content: center;
     align-items: center;
     padding: 15px;
-    background: -webkit-linear-gradient(to right, #00c3ff, #ffff1c);
-    background: linear-gradient(to right, #64b1f0, #312d5d);
+    background: -webkit-linear-gradient(to left, #00c3ff, #ffff1c);
+    background: linear-gradient(to left, #64b1f0, #312d5d);
 }
 
 
